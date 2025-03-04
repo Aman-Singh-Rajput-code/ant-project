@@ -1,0 +1,31 @@
+<project name="MyAntProject" default="compile" basedir=".">
+
+    <!-- Directories -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+
+    <!-- Task to clean old build files -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- Task to create the build directory -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <!-- Task to compile Java files -->
+    <target name="compile" depends="clean,init">
+        <javac srcdir="${src.dir}" destdir="${build.dir}"/>
+    </target>
+
+    <!-- Task to run the project (if you have a main class) -->
+    <target name="run" depends="compile">
+        <java classname="com.example.App" fork="true">
+            <classpath>
+                <pathelement location="${build.dir}"/>
+            </classpath>
+        </java>
+    </target>
+
+</project>
